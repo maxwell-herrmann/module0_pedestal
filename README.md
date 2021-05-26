@@ -15,4 +15,4 @@ where jsonFileList is, again, a text file with the names of the .json files desi
 ```
 $ python3 pedestal_plotting.py datalog.h5
 ```
-As set up now, all plots will be saved to the plots directory. 
+As set up now, plots made by pedestal_plotting.py will be saved to the plots directory with names generated from either the date of the run or the unique chanenl ID. 
