@@ -11,4 +11,8 @@ will produce .json files in the jsons directory that correspond to the original 
 ```
 $ python3 pedestal_plotting.py jsonFileList
 ```
-where jsonFileList is, again, a text file with the names of the .json files desired. This python script can also make ADC vs time plots for individual channels given a unique channel ID and a datalog file to run over. As set up now, all plots will be saved to the plots directory. 
+where jsonFileList is, again, a text file with the names of the .json files desired. This python script can also make ADC vs time plots for individual channels given a unique channel ID and a datalog file to run over. 
+```
+$ python3 pedestal_plotting.py datalog.h5
+```
+As set up now, all plots will be saved to the plots directory. 
