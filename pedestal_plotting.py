@@ -51,7 +51,7 @@ def good_channel(unique, channelList):
     return good
 """
 
-def boxplot(fileList, fliers, destination):
+def boxplot(fileList, fliers, destination=None):
     f = open(fileList, "r")
 
     xAxis = []
@@ -65,10 +65,14 @@ def boxplot(fileList, fliers, destination):
     fig = plt.figure()
     plt.xticks([], xAxis)
     bp = plt.boxplot(series, showfliers=fliers)
-    name = 'boxplot_no_fliers.png'
+    filename = 'boxplot_no_fliers.png'
     if fliers:
-        name='boxplot_fliers.png'
-    plt.savefig(destination+name)
+        filename='boxplot_fliers.png'
+    if destination:
+        filename=destination+filename
+    if not destination:
+        filename='plots/'+filename
+    plt.savefig(filename)
     plt.show()
 
 def histplot(fileList):
@@ -86,7 +90,7 @@ def histplot(fileList):
     plt.hist2d(means, stds, bins=(100, 100), cmap=plt.cm.jet)
     plt.show()
 
-def mean_overlay_hist(fileList, logg, destination):
+def mean_overlay_hist(fileList, logg, destination=None):
     runs,dates=load(fileList)
     for i in range(0, len(runs)):
         plt.hist([item[1] for item in runs[i]], bins=100,  histtype=u'step', log=logg, label=str(dates[i]))
@@ -98,10 +102,14 @@ def mean_overlay_hist(fileList, logg, destination):
     filename='gathered_mean_distributions.png'
     if logg:
         filename='gathered_mean_distributions_log.png'
-    plt.savefig(destination+filename)
+    if destination:
+        filename=destination+filename
+    if not destination:
+        filename='plots/'+filename
+    plt.savefig(filename)
     plt.show()
 
-def std_overlay_hist(fileList, logg, destination):
+def std_overlay_hist(fileList, logg, destination=None):
     runs,dates=load(fileList)
     for i in range(0, len(runso)):
         plt.hist([item[2] for item in runs[i]], bins=100, histtype=u'step', log=logg, label=str(dates[i]))
@@ -113,21 +121,29 @@ def std_overlay_hist(fileList, logg, destination):
     filename='gathered_std_distributions.png'
     if logg:
         filename='gathered_std_distributions_log.png'
-    plt.savefig(destination+filename)
+    if destination:
+        filename=destination+filename
+    if not destination:
+        name='plots/'+filename
+    plt.savefig(filename)
     plt.show()
 
-def single_mean_hist(fileList, n, logg):
+def single_mean_hist(fileList, n, logg, destination=None):
     runs,dates=load(fileList)
     plt.hist([item[1] for item in runs[n]], bins=100, histtype=u'step', log=logg)
     plt.xlabel('mean ADC')
     plt.ylabel('channel count')
-    filename='plots/'+str(dates[n])+'_mean.png'
+    filename=str(dates[n])+'_mean.png'
     if logg:
-        filename='plots/'+str(dates[n])+'_mean_log.png'
+        filename=str(dates[n])+'_mean_log.png'
+    if destination:
+        filename=destination+filename
+    if not destination:
+        filename='plots/'+filename
     plt.savefig(filename)
     plt.show()
 
-def single_channel_adc_vs_time(unique, h5file, destination):
+def single_channel_adc_vs_time(unique, h5file, destination=None):
     f=h5py.File(h5file, 'r+')
     date=re.search(r'\d\d\d\d_\d\d_\d\d_\d\d_\d\d',h5file).group(0)    
     p=f['packets']['timestamp']
@@ -154,13 +170,17 @@ def single_channel_adc_vs_time(unique, h5file, destination):
 
     f['packets']['timestamp']=p
     f.close()
-
+    filename=date+str(unique)+'_adc_vs_time.png'
+    if destination:
+        filename=destination+filename
+    if not destination:
+        filename='plots/'+filename
     plt.scatter(timestamp, adc)
-    plt.savefig(destination+date+str(unique)+'_adc_vs_time.png')
+    plt.savefig(filename)
     plt.show()
 
 if __name__ == '__main__':
-    single_channel_adc_vs_time(8722772, sys.argv[1], 'plots/')
+    #single_channel_adc_vs_time(8722772, sys.argv[1], 'plots/')
     #boxplot(sys.argv[1], False, 'plots/')
     #boxplot(sys.argv[1], True, 'plots/')
     #mean_overlay_hist(sys.argv[1], False, 'plots/')
