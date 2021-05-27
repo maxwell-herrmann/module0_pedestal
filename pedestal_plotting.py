@@ -111,7 +111,7 @@ def mean_overlay_hist(fileList, logg, destination=None):
 
 def std_overlay_hist(fileList, logg, destination=None):
     runs,dates=load(fileList)
-    for i in range(0, len(runso)):
+    for i in range(0, len(runs)):
         plt.hist([item[2] for item in runs[i]], bins=100, histtype=u'step', log=logg, label=str(dates[i]))
     plt.legend()
     plt.xlabel('std of ADC')
