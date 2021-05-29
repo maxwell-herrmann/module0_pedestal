@@ -5,7 +5,7 @@ $ wget -i wgetlist
 ```
 To generate any mean ADC or standard deviation of ADC plots (including boxplots), first make a text file in the main directory with the file names of the datalog files you're interested in running over. Running
 ```
-$ python3 pedestal_functional.py dataList fileList
+$ python3 pedestal_functional.py fileList
 ```
 will produce .json files in the jsons directory that correspond to the original .h5 datalog files. The .json files contain a unique channel ID, the mean, and the standard deviation of the ADC counts for that channel in that run. These files contain all channels, including those marked as bad. To produce files with only good channels, use the pedestal_filter.py script:
 ```
