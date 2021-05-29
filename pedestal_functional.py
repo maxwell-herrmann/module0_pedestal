@@ -128,5 +128,4 @@ def filter(jsonList, channelList):
 if __name__ == '__main__':
     main(sys.argv[1])
     #filter(sys.argv[3], sys.argv[2])
-    os.system('vlc /home/giancoli/haruu.mp4')
     # convert(*sys.argv[1:], excluded_channels=_excluded_channels, std_threshold = 4)
