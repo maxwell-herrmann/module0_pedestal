@@ -19,4 +19,4 @@ where jsonFileList is, again, a text file with the names of the .json files desi
 ```
 $ python3 pedestal_plotting.py datalog.h5
 ```
-As set up now, plots made by pedestal_plotting.py will be saved to the plots directory with names generated from either the date of the run or the unique chanenl ID. Disregard placeholder textfiles in the plots and jsons directories.
+As set up now, plots made by pedestal_plotting.py will be saved to the plots directory with names generated from either the date of the run or the unique chanenl ID. Also, the list files in this repo are lists of all the files that would be created from the pedestal .h5 files. Disregard placeholder textfiles in the plots and jsons directories.
