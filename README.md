@@ -1,5 +1,5 @@
 # module0_pedestal
-The folders datalogs and bad_channel_files should both be filled by running (in the directory)
+The folders datalogs and bad_channel_files should both be filled by running (in the datalogs directory and in the bad_channel_files directory)
 ```
 $ wget -i wgetlist
 ```
