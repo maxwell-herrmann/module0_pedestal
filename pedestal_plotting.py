@@ -54,16 +54,18 @@ def good_channel(unique, channelList):
     return good
 """
 
-def boxplot(fileList, fliers, destination=None):
+def boxplot(fileList, fliers, path, destination=None):
     f = open(fileList, "r")
 
     xAxis = []
     series = []
     for file in f:
-        f1 = open (file.strip(), "r")
+        name=path+file.strip()
+        f1 = open (name, "r")
         out = json.loads(f1.read())
         series.append(list(map(lambda x: x[1], out)))
         xAxis.append(re.search(r'\d\d\d\d_\d\d_\d\d',file.strip()).group(0))
+        f1.close()
 
     fig = plt.figure()
     plt.xticks([], xAxis)
