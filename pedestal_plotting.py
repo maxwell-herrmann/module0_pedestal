@@ -96,7 +96,7 @@ def histplot(fileList):
     plt.show()
     f.close()
 
-def mean_overlay_hist(fileList, logg, destination=None, path):
+def mean_overlay_hist(fileList, logg, path, destination=None):
     runs,dates=load(fileList, path)
     for i in range(0, len(runs)):
         plt.hist([item[1] for item in runs[i]], bins=100,  histtype=u'step', log=logg, label=str(dates[i]))
@@ -115,7 +115,7 @@ def mean_overlay_hist(fileList, logg, destination=None, path):
     plt.savefig(filename)
     plt.show()
 
-def std_overlay_hist(fileList, logg, destination=None, path):
+def std_overlay_hist(fileList, logg, path, destination=None):
     runs,dates=load(fileList, path)
     for i in range(0, len(runs)):
         plt.hist([item[2] for item in runs[i]], bins=100, histtype=u'step', log=logg, label=str(dates[i]))
@@ -134,7 +134,7 @@ def std_overlay_hist(fileList, logg, destination=None, path):
     plt.savefig(filename)
     plt.show()
 
-def single_mean_hist(fileList, n, logg, destination=None, path):
+def single_mean_hist(fileList, n, logg, path, destination=None):
     runs,dates=load(fileList, path)
     plt.hist([item[1] for item in runs[n]], bins=100, histtype=u'step', log=logg)
     plt.xlabel('mean ADC')
@@ -187,12 +187,12 @@ def single_channel_adc_vs_time(unique, h5file, destination=None):
 
 if __name__ == '__main__':
     #single_channel_adc_vs_time(8722772, sys.argv[1], 'plots/')
-    #boxplot(sys.argv[1], False, 'plots/', 'good_jsons/')
-    #boxplot(sys.argv[1], True, 'plots/', 'good_jsons/')
-    #mean_overlay_hist(sys.argv[1], False, 'plots/', 'good_jsons/')
-    #mean_overlay_hist(sys.argv[1], True, 'plots/', 'good_jsons/')
-    #std_overlay_hist(sys.argv[1], False, 'plots/', 'good_jsons/')
-    #std_overlay_hist(sys.argv[1], True, 'plots/', 'good_jsons/')
+    #boxplot(sys.argv[1], False, 'good_jsons/', 'plots/')
+    #boxplot(sys.argv[1], True, 'good_jsons/', 'plots/')
+    #mean_overlay_hist(sys.argv[1], False, 'good_jsons/' 'plots/')
+    #mean_overlay_hist(sys.argv[1], True, 'good_jsons/', 'plots/')
+    #std_overlay_hist(sys.argv[1], False, 'good_jsons/', 'plots/')
+    #std_overlay_hist(sys.argv[1], True, 'good_jsons', 'plots/')
     #for i in range(0, 7):
     #    single_mean_hist(sys.argv[1], i, False)
     #    single_mean_hist(sys.argv[1], i, True)
