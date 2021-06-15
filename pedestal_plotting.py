@@ -191,10 +191,10 @@ if __name__ == '__main__':
     #single_channel_adc_vs_time(8722772, sys.argv[1], 'plots/')
     #boxplot(sys.argv[1], False, 'good_jsons/', 'plots/')
     #boxplot(sys.argv[1], True, 'good_jsons/', 'plots/')
-    #mean_overlay_hist(sys.argv[1], False, 'good_jsons/' 'plots/')
+    #mean_overlay_hist(sys.argv[1], False, 'good_jsons/', 'plots/')
     #mean_overlay_hist(sys.argv[1], True, 'good_jsons/', 'plots/')
     #std_overlay_hist(sys.argv[1], False, 'good_jsons/', 'plots/')
-    #std_overlay_hist(sys.argv[1], True, 'good_jsons', 'plots/')
+    #std_overlay_hist(sys.argv[1], True, 'good_jsons/', 'plots/')
     #for i in range(0, 7):
     #    single_mean_hist(sys.argv[1], i, False)
     #    single_mean_hist(sys.argv[1], i, True)
