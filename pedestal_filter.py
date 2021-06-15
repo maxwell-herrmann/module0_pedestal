@@ -48,7 +48,7 @@ def good_channel_jsons(jsonList, channelList):
         out=json.loads(f1.read())
         out1=[x for x in out if good_channel(x[0], channelList)]
         f1.close()
-        print('Writing ' + file.strip()[-5])
+        print('Writing ' + name2)
         f2=open(name2, 'w')
         f2.write(json.dumps(out1, default=np_encoder))
         f2.close()
