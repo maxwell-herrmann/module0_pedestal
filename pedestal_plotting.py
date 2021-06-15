@@ -22,15 +22,18 @@ def np_encoder(object):
 def unique_channel_id(io_group, io_channel, chip_id, channel_id):
     return channel_id+64*(chip_id + 256*(io_channel+256*io_group))
 
-def load(fileList):
+def load(fileList, path):
     f=open(fileList, 'r')
     outs=[]
     dates=[]
     for file in f:
-        f1=open(file.strip(), 'r')
+        name=path+file.strip()
+        f1=open(name, 'r')
         out=json.loads(f1.read())
         outs.append(out)
         dates.append(re.search(r'\d\d\d\d_\d\d_\d\d_\d\d_\d\d',file.strip()).group(0))
+        f1.close()
+    f.close()
     return outs, dates
 
 """
@@ -74,6 +77,7 @@ def boxplot(fileList, fliers, destination=None):
         filename='plots/'+filename
     plt.savefig(filename)
     plt.show()
+    f.close()
 
 def histplot(fileList):
     f=open(fileList, 'r')
@@ -86,12 +90,14 @@ def histplot(fileList):
 
         means.append(list(map(lambda x: x[1], out)))
         stds.append(list(map(lambda x: x[2], out)))
+        f1.close()
     fig=plt.figure()
     plt.hist2d(means, stds, bins=(100, 100), cmap=plt.cm.jet)
     plt.show()
+    f.close()
 
-def mean_overlay_hist(fileList, logg, destination=None):
-    runs,dates=load(fileList)
+def mean_overlay_hist(fileList, logg, destination=None, path):
+    runs,dates=load(fileList, path)
     for i in range(0, len(runs)):
         plt.hist([item[1] for item in runs[i]], bins=100,  histtype=u'step', log=logg, label=str(dates[i]))
     plt.legend()
@@ -109,8 +115,8 @@ def mean_overlay_hist(fileList, logg, destination=None):
     plt.savefig(filename)
     plt.show()
 
-def std_overlay_hist(fileList, logg, destination=None):
-    runs,dates=load(fileList)
+def std_overlay_hist(fileList, logg, destination=None, path):
+    runs,dates=load(fileList, path)
     for i in range(0, len(runs)):
         plt.hist([item[2] for item in runs[i]], bins=100, histtype=u'step', log=logg, label=str(dates[i]))
     plt.legend()
@@ -128,8 +134,8 @@ def std_overlay_hist(fileList, logg, destination=None):
     plt.savefig(filename)
     plt.show()
 
-def single_mean_hist(fileList, n, logg, destination=None):
-    runs,dates=load(fileList)
+def single_mean_hist(fileList, n, logg, destination=None, path):
+    runs,dates=load(fileList, path)
     plt.hist([item[1] for item in runs[n]], bins=100, histtype=u'step', log=logg)
     plt.xlabel('mean ADC')
     plt.ylabel('channel count')
@@ -181,12 +187,12 @@ def single_channel_adc_vs_time(unique, h5file, destination=None):
 
 if __name__ == '__main__':
     #single_channel_adc_vs_time(8722772, sys.argv[1], 'plots/')
-    #boxplot(sys.argv[1], False, 'plots/')
-    #boxplot(sys.argv[1], True, 'plots/')
-    #mean_overlay_hist(sys.argv[1], False, 'plots/')
-    #mean_overlay_hist(sys.argv[1], True, 'plots/')
-    #std_overlay_hist(sys.argv[1], False, 'plots/')
-    #std_overlay_hist(sys.argv[1], True, 'plots/')
+    #boxplot(sys.argv[1], False, 'plots/', 'good_jsons/')
+    #boxplot(sys.argv[1], True, 'plots/', 'good_jsons/')
+    #mean_overlay_hist(sys.argv[1], False, 'plots/', 'good_jsons/')
+    #mean_overlay_hist(sys.argv[1], True, 'plots/', 'good_jsons/')
+    #std_overlay_hist(sys.argv[1], False, 'plots/', 'good_jsons/')
+    #std_overlay_hist(sys.argv[1], True, 'plots/', 'good_jsons/')
     #for i in range(0, 7):
     #    single_mean_hist(sys.argv[1], i, False)
     #    single_mean_hist(sys.argv[1], i, True)
