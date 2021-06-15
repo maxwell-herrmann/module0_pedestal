@@ -64,11 +64,11 @@ def boxplot(fileList, fliers, path, destination=None):
         f1 = open (name, "r")
         out = json.loads(f1.read())
         series.append(list(map(lambda x: x[1], out)))
-        xAxis.append(re.search(r'\d\d\d\d_\d\d_\d\d',file.strip()).group(0))
+        timestamp = re.search(r'\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d',file.strip()).group(0)
+        xAxis.append(f"{timestamp[:4]}/{timestamp[5:7]}/{timestamp[8:10]}\n{timestamp[11:13]}:{timestamp[14:16]}:{timestamp[17:19]}")
         f1.close()
 
     fig = plt.figure()
-    plt.xticks([], xAxis)
     bp = plt.boxplot(series, showfliers=fliers)
     filename = 'boxplot_no_fliers.png'
     if fliers:
