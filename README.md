@@ -13,7 +13,7 @@ python3 pedestal_filter.py jsonList channelList
 ```
 This will produce the jsons and place them all in the good_jsons folder (this code is easy to edit if you want to put them somewhere else or use a different naming scheme). I had a weird time trying to implement the functionality of this inside pedestal_functional.py, so I've left them separate for now because that seems to work best. To make plots using this data, use the functions in pedestal_plotting.py and do 
 ```
-python3 pedestal_plotting.py jsonList
+python3 pedestal_plotting.py goodJsonList
 ```
 where jsonFileList is, again, a text file with the names of the .json files desired. This python script can also make ADC vs time plots for individual channels given a unique channel ID and a datalog file to run over. 
 ```
