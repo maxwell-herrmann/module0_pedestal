@@ -22,7 +22,7 @@ def heatMap(fileList, geometryJson):
     for file in f:
         f2 = open (file.strip(), "r")
         out = json.loads(f2.read())
-        out = list(map(lambda x: (x[0], np.mean(x[2]), np.std(x[2])), out))
+        #out = list(map(lambda x: (x[0], np.mean(x[2]), np.std(x[2])), out))
 
         runNo = re.search(r'\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d',file.strip()).group(0)
 
@@ -30,16 +30,17 @@ def heatMap(fileList, geometryJson):
 
         for channel in out:
             try:
-                geometryDict[str(channel[0])]
+                #geometryDict[str(channel[0])]
+                heatMap[round(geometryDict[str(channel[0])][1])][round(geometryDict[str(channel[0])][0])] = channel[1]
+
             except KeyError:
                 continue
 
-            heatMap[round(geometryDict[str(channel[0])][1])][round(geometryDict[str(channel[0])][0])] = channel[1]
+            
+        #print(1.0 - ( np.count_nonzero(heatMap) / float(heatMap.size) ))
 
-        print(1.0 - ( np.count_nonzero(heatMap) / float(heatMap.size) ))
 
-
-        fig = plt.figure(figsize=[16, 9])
+        fig = plt.figure(figsize=[16, 10])
         ax = sns.heatmap(heatMap, vmin=65, vmax=95)
         plt.savefig(f"plots/{runNo}_heat.png", transparent=True)
         plt.close()
