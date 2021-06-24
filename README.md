@@ -1,7 +1,7 @@
 ## setup
-The folders datalogs and bad_channel_files should both be filled by running (in the datalogs directory and in the bad_channel_files directory)
+The folders datalogs and bad_channel_files should both be filled by running (in the main directory)
 ```
-wget -i wgetlist
+./getdata.sh
 ```
 To generate any mean ADC or standard deviation of ADC plots (including boxplots), first make a text file in the main directory with the file names of the datalog files you're interested in running over. Running
 ```
