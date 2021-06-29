@@ -5,13 +5,13 @@ git clone https://github.com/maxwell-herrmann/module0_pedestal.git
 ```
 This will fill the directory with the files you see here. Next, the folders datalogs and bad_channel_files should both be filled by running (in the main directory)
 ```
-./getdata.sh
-```
-This may not work right away. If you get a permission error, run
-```
 chmod +x getdata.sh
 ```
-first. To generate any mean ADC or standard deviation of ADC plots (including boxplots), first make a text file in the main directory with the file names of the datalog files you're interested in running over. Running
+then 
+```
+./get data.sh
+```
+To generate any mean ADC or standard deviation of ADC plots (including boxplots), first make a text file in the main directory with the file names of the datalog files you're interested in running over. Running
 ```
 python pedestal_functional.py fileList
 ```
