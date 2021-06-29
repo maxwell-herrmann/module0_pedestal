@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import re
 from functools import reduce
+from scipy.stats import kde
+import math
+import pandas as pd
 
 def heatMap(fileList, geometryJson):
     f = open(fileList, "r")
@@ -15,35 +18,37 @@ def heatMap(fileList, geometryJson):
 
     coords = list(map(list, zip(*list(geometryDict.values()))))
     xMax = round(max(coords[0]))+1
+    xMin = round(min(coords[0]))-1
     yMax = round(max(coords[1]))+1
-
+    yMin = round(min(coords[1]))-1
+    
     print(xMax, yMax)
-
+    print(xMin, yMin)
     for file in f:
-        f2 = open (file.strip(), "r")
+        f2 = open ('good_jsons/'+file.strip(), "r")
+        
         out = json.loads(f2.read())
-        #out = list(map(lambda x: (x[0], np.mean(x[2]), np.std(x[2])), out))
-
+        
         runNo = re.search(r'\d\d\d\d_\d\d_\d\d_\d\d_\d\d_\d\d',file.strip()).group(0)
 
-        heatMap = np.empty((yMax, xMax))
-
+        heatMap = np.zeros((xMax-xMin, yMax-yMin))
+        
         for channel in out:
             try:
-                #geometryDict[str(channel[0])]
-                heatMap[round(geometryDict[str(channel[0])][1])][round(geometryDict[str(channel[0])][0])] = channel[1]
-
+                heatMap[round(geometryDict[str(channel[0])][0])-xMin][round(geometryDict[str(channel[0])][1])-yMin] += channel[1]
+              
             except KeyError:
-                continue
+               continue
+        
+        fig = plt.figure(figsize=[20,10])
+        ax = sns.heatmap(heatMap, cmap='viridis', robust=True)
 
-            
-        #print(1.0 - ( np.count_nonzero(heatMap) / float(heatMap.size) ))
+
+        plt.savefig(f"plots/{runNo}_heat.png", transparent=True)       
+        
 
 
-        fig = plt.figure(figsize=[16, 10])
-        ax = sns.heatmap(heatMap, vmin=65, vmax=95)
-        plt.savefig(f"plots/{runNo}_heat.png", transparent=True)
-        plt.close()
+
 
 if __name__ == '__main__':
     heatMap(sys.argv[1], sys.argv[2])
