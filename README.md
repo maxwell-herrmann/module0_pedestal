@@ -1,5 +1,9 @@
 ## setup
-The folders datalogs and bad_channel_files should both be filled by running (in the main directory)
+To get this github repository on your local machine, first navigate to the directory you want it to be in and run
+```
+git clone https://github.com/maxwell-herrmann/module0_pedestal.git
+```
+This will fill the directory with the files you see here. Next, the folders datalogs and bad_channel_files should both be filled by running (in the main directory)
 ```
 ./getdata.sh
 ```
