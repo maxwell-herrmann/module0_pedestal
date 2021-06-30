@@ -39,6 +39,6 @@ python location_dict.py geometry_files/multi_tile_layout-2.1.16.yaml
 ```
 This will create a .json file with a dictionary giving the position of a channel from its unique id. Then to produce the actual plots, run
 ```
-python pedestal_heatmap.py goodJsonList geometry_files/multi_tile_layout-2.1.16.json
+python pedestal_heatmap.py goodJsonList geometry_files/multi_tile_layout-2.1.16-dict.json
 ```
 This will save the plots in the format (run_date)_ heat.png to the plots folder.
