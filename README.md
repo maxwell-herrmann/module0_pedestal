@@ -35,7 +35,7 @@ As set up now, plots made by pedestal_plotting.py will be saved to the plots dir
 
 To make heatmap plots, first run
 ```
-python location_dict geometry_files/multi_tile_layout-2.1.16.yaml
+python location_dict.py geometry_files/multi_tile_layout-2.1.16.yaml
 ```
 This will create a .json file with a dictionary giving the position of a channel from its unique id. Then to produce the actual plots, run
 ```
