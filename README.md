@@ -31,6 +31,7 @@ where jsonFileList is, again, a text file with the names of the .json files desi
 ```
 python pedestal_plotting.py datalogs/[desired datalog file]
 ```
+You will need to select which functions you want to use by editing the python file pedestal_plotting.py. Many of the desired functions are already called near the end of the file, but the command above will only work after you've commented out all but the single channel ADC vs time function.
 As set up now, plots made by pedestal_plotting.py will be saved to the plots directory with names generated from either the date of the run or the unique chanenl ID. Also, the list files in this repo are lists of all the files that would be created from the pedestal .h5 files. Disregard placeholder textfiles in the plots and jsons directories.
 
 To make heatmap plots, first run
